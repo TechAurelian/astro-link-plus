@@ -1,21 +1,14 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
-import { isExternalLink, parseWithUrlMap, addUtmParameters } from './utils';
+import type { LinkProps } from '../src/types';
+import { isExternalLink, parseWithUrlMap, addUtmParameters } from '../src/utils';
 
-export type Props = HTMLAttributes<'a'> & {
-  newTab?: boolean;
-  addUtm?: boolean;
-  utm_source?: string;
-  utm_medium?: string;
-  utm_campaign?: string;
-  utm_term?: string;
-  utm_content?: string;
-};
+type Props = LinkProps;
 
 const {
   href,
   newTab,
   addUtm = false,
+  utmAsReferrer = false,
   utm_source = 'website',
   utm_medium = 'link',
   utm_campaign,
@@ -42,7 +35,15 @@ const cNewTab = newTab || (isExternal && newTab !== false);
 
 // Add UTM params to the link
 if (addUtm) {
-  cHref = addUtmParameters(cHref, utm_source, utm_medium, utm_campaign, utm_term, utm_content);
+  cHref = addUtmParameters(
+    cHref,
+    utmAsReferrer,
+    utm_source,
+    utm_medium,
+    utm_campaign,
+    utm_term,
+    utm_content
+  );
 }
 
 // console.log(`cHref: ${cHref}`);
@@ -50,8 +51,8 @@ if (addUtm) {
 
 <a
   href={cHref}
-  target={cNewTab ? '_blank' : ''}
-  rel={isExternal ? 'noopener noreferrer' : ''}
+  target={cNewTab ? '_blank' : null}
+  rel={isExternal ? 'noopener noreferrer' : null}
   {...props}
 >
   <slot />

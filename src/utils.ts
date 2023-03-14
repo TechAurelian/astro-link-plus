@@ -20,7 +20,7 @@ export function isExternalLink(href: string): boolean {
 
 /**
  * Replaces any parts of the url between '{' and '}' with the corresponding value from the url map.
- * 
+ *
  * @param href The link to parse.
  * @param urlMap The url map to use.
  * @returns The parsed link.
@@ -42,6 +42,7 @@ export function parseWithUrlMap(href: string, urlMap: Record<string, string>): s
  */
 export function addUtmParameters(
   href: string,
+  utmAsReferrer: boolean,
   utm_source: string,
   utm_medium: string,
   utm_campaign: string,
@@ -49,11 +50,24 @@ export function addUtmParameters(
   utm_content: string
 ): string {
   const url = new URL(href);
-  let params = url.searchParams;
+  // let params = url.searchParams;
+
+  const params = new URLSearchParams();
   if (utm_source) params.append('utm_source', utm_source);
   if (utm_medium) params.append('utm_medium', utm_medium);
   if (utm_campaign) params.append('utm_campaign', utm_campaign);
   if (utm_term) params.append('utm_term', utm_term);
   if (utm_content) params.append('utm_content', utm_content);
+
+  if (utmAsReferrer) {
+    url.searchParams.append('referrer', params.toString());
+  } else {
+    // Append params to url.searchParams, one by one, because no `appendAll` method exists
+    // See https://github.com/whatwg/url/issues/461
+    params.forEach((value, key) => {
+      url.searchParams.append(key, value);
+    });
+  }
+
   return url.toString();
 }
