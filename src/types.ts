@@ -8,4 +8,6 @@
 
 // import { z } from 'astro/zod';
 
-export {};
+export interface IntegrationOptions {
+  urlMap?: Record<string, string>;
+}

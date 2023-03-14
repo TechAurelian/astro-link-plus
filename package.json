@@ -14,7 +14,8 @@
     "url": "https://github.com/techaurelian/astro-link-kit/issues"
   },
   "exports": {
-    ".": "./index.ts"
+    ".": "./index.ts",
+    "./components": "./components/index.ts"
   },
   "files": [
     "src",

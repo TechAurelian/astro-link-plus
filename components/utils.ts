@@ -19,6 +19,17 @@ export function isExternalLink(href: string): boolean {
 }
 
 /**
+ * Replaces any parts of the url between '{' and '}' with the corresponding value from the url map.
+ * 
+ * @param href The link to parse.
+ * @param urlMap The url map to use.
+ * @returns The parsed link.
+ */
+export function parseWithUrlMap(href: string, urlMap: Record<string, string>): string {
+  return href.replace(/\{([^}]+)\}/g, (match, key) => urlMap[key] || match);
+}
+
+/**
  * Add UTM parameters to a link.
  *
  * @param href The link to add UTM parameters to.

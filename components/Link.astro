@@ -1,7 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import { isExternalLink, addUtmParameters } from './utils';
-import urlMap from '@data/url-map';
+import { isExternalLink, parseWithUrlMap, addUtmParameters } from './utils';
 
 export type Props = HTMLAttributes<'a'> & {
   newTab?: boolean;
@@ -30,8 +29,12 @@ if (!href) throw new Error('Link requires a href prop');
 
 let cHref = href.toString();
 
-// Replace any parts of the url between '{' and '}' with the corresponding value from the urlMap
-cHref = cHref.replace(/\{([^}]+)\}/g, (match, key) => urlMap[key as keyof typeof urlMap] || match);
+// Replace any parts of the url between '{' and '}' with the value from the url map passed to the integration
+const urlMap = globalThis.astroLinkKitOptions.urlMap;
+if (urlMap) {
+  console.log(`urlMap2: ${JSON.stringify(urlMap)}`);
+  cHref = parseWithUrlMap(cHref, urlMap);
+}
 
 // Decide if the link should open in a new tab
 const isExternal = isExternalLink(cHref);
@@ -42,7 +45,7 @@ if (addUtm) {
   cHref = addUtmParameters(cHref, utm_source, utm_medium, utm_campaign, utm_term, utm_content);
 }
 
-console.log(`cHref: ${cHref}`);
+// console.log(`cHref: ${cHref}`);
 ---
 
 <a
