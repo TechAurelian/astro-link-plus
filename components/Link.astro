@@ -30,7 +30,7 @@ if (!href) throw new Error('Link requires a href prop');
 let cHref = href.toString();
 
 // Replace any parts of the url between '{' and '}' with the value from the url map passed to the integration
-const urlMap = globalThis.astroLinkKitOptions.urlMap;
+const urlMap = globalThis.astroLinkPlusOptions.urlMap;
 if (urlMap) {
   console.log(`urlMap2: ${JSON.stringify(urlMap)}`);
   cHref = parseWithUrlMap(cHref, urlMap);

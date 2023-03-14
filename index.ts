@@ -14,15 +14,15 @@ import { IntegrationOptions } from './src/types';
 
 declare global {
   // eslint-disable-next-line no-var
-  var astroLinkKitOptions: IntegrationOptions;
+  var astroLinkPlusOptions: IntegrationOptions;
 }
 
 export default function integration(options: IntegrationOptions = {}): AstroIntegration {
-  globalThis.astroLinkKitOptions = options;
-  console.log('Options passed to me, the integration:', astroLinkKitOptions);
+  globalThis.astroLinkPlusOptions = options;
+  console.log('Options passed to me, the integration:', astroLinkPlusOptions);
 
   return {
-    name: 'astro-link-kit',
+    name: 'astro-link-plus',
     hooks: {},
   };
 }
