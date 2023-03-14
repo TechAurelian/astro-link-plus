@@ -1,0 +1,41 @@
+{
+  "name": "astro-link-kit",
+  "description": "A set of Astro components for creating links and link buttons with enhanced built-in features such as opening external links in new tabs, adding rel keywords and UTM parameters, and more.",
+  "version": "1.0.0",
+  "type": "module",
+  "author": "TechAurelian (https://techaurelian.com)",
+  "license": "MIT",
+  "homepage": "https://github.com/techaurelian/astro-link-kit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/techaurelian/astro-link-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/techaurelian/astro-link-kit/issues"
+  },
+  "exports": {
+    ".": "./index.ts"
+  },
+  "files": [
+    "src",
+    "index.ts"
+  ],
+  "keywords": [
+    "astro",
+    "astro-component",
+    "link",
+    "a",
+    "href",
+    "anchor",
+    "external",
+    "utm",
+    "button",
+    "link-button",
+    "icon-button",
+    "link-kit"
+  ],
+  "scripts": {},
+  "devDependencies": {
+    "astro": "^2.1.3"
+  }
+}

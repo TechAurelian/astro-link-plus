@@ -1,0 +1,55 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { isExternalLink, addUtmParameters } from './utils';
+import urlMap from '@data/url-map';
+
+export type Props = HTMLAttributes<'a'> & {
+  newTab?: boolean;
+  addUtm?: boolean;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_term?: string;
+  utm_content?: string;
+};
+
+const {
+  href,
+  newTab,
+  addUtm = false,
+  utm_source = 'website',
+  utm_medium = 'link',
+  utm_campaign,
+  utm_term,
+  utm_content,
+  ...props
+} = Astro.props;
+
+// Ensure that the href prop is present
+if (!href) throw new Error('Link requires a href prop');
+
+let cHref = href.toString();
+
+// Replace any parts of the url between '{' and '}' with the corresponding value from the urlMap
+cHref = cHref.replace(/\{([^}]+)\}/g, (match, key) => urlMap[key as keyof typeof urlMap] || match);
+
+// Decide if the link should open in a new tab
+const isExternal = isExternalLink(cHref);
+const cNewTab = newTab || (isExternal && newTab !== false);
+
+// Add UTM params to the link
+if (addUtm) {
+  cHref = addUtmParameters(cHref, utm_source, utm_medium, utm_campaign, utm_term, utm_content);
+}
+
+console.log(`cHref: ${cHref}`);
+---
+
+<a
+  href={cHref}
+  target={cNewTab ? '_blank' : ''}
+  rel={isExternal ? 'noopener noreferrer' : ''}
+  {...props}
+>
+  <slot />
+</a>
