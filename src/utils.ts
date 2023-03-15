@@ -33,31 +33,31 @@ export function parseWithUrlMap(href: string, urlMap: Record<string, string>): s
  * Add UTM parameters to a link.
  *
  * @param href The link to add UTM parameters to.
- * @param utm_source The UTM source.
- * @param utm_medium The UTM medium.
- * @param utm_campaign The UTM campaign.
- * @param utm_term The UTM term.
- * @param utm_content The UTM content.
+ * @param utmSource The UTM source.
+ * @param utmMedium The UTM medium.
+ * @param utmCampaign The UTM campaign.
+ * @param utmTerm The UTM term.
+ * @param utmContent The UTM content.
  * @returns The link with all the non-empty UTM parameters that were passed.
  */
 export function addUtmParameters(
   href: string,
   utmAsReferrer: boolean,
-  utm_source: string,
-  utm_medium: string,
-  utm_campaign: string,
-  utm_term: string,
-  utm_content: string
+  utmSource: string,
+  utmMedium: string,
+  utmCampaign: string,
+  utmTerm: string,
+  utmContent: string
 ): string {
   const url = new URL(href);
   // let params = url.searchParams;
 
   const params = new URLSearchParams();
-  if (utm_source) params.append('utm_source', utm_source);
-  if (utm_medium) params.append('utm_medium', utm_medium);
-  if (utm_campaign) params.append('utm_campaign', utm_campaign);
-  if (utm_term) params.append('utm_term', utm_term);
-  if (utm_content) params.append('utm_content', utm_content);
+  if (utmSource) params.append('utm_source', utmSource);
+  if (utmMedium) params.append('utm_medium', utmMedium);
+  if (utmCampaign) params.append('utm_campaign', utmCampaign);
+  if (utmTerm) params.append('utm_term', utmTerm);
+  if (utmContent) params.append('utm_content', utmContent);
 
   if (utmAsReferrer) {
     url.searchParams.append('referrer', params.toString());

@@ -5,15 +5,19 @@ import { isExternalLink, parseWithUrlMap, addUtmParameters } from '../src/utils'
 type Props = LinkProps;
 
 const {
+  addUtm = false,
   href,
   newTab,
-  addUtm = false,
+  noFollowRel,
+  noReferrerRel,
+  sponsoredRel,
+  ugcRel,
   utmAsReferrer = false,
-  utm_source = 'website',
-  utm_medium = 'link',
-  utm_campaign,
-  utm_term,
-  utm_content,
+  utmCampaign,
+  utmContent,
+  utmMedium = 'link',
+  utmSource = 'website',
+  utmTerm,
   ...props
 } = Astro.props;
 
@@ -25,7 +29,7 @@ let cHref = href.toString();
 // Replace any parts of the url between '{' and '}' with the value from the url map passed to the integration
 const urlMap = globalThis.astroLinkPlusOptions.urlMap;
 if (urlMap) {
-  console.log(`urlMap2: ${JSON.stringify(urlMap)}`);
+  // console.log(`urlMap2: ${JSON.stringify(urlMap)}`);
   cHref = parseWithUrlMap(cHref, urlMap);
 }
 
@@ -38,11 +42,11 @@ if (addUtm) {
   cHref = addUtmParameters(
     cHref,
     utmAsReferrer,
-    utm_source,
-    utm_medium,
-    utm_campaign,
-    utm_term,
-    utm_content
+    utmSource,
+    utmMedium,
+    utmCampaign,
+    utmTerm,
+    utmContent
   );
 }
 
@@ -52,7 +56,7 @@ if (addUtm) {
 <a
   href={cHref}
   target={cNewTab ? '_blank' : null}
-  rel={isExternal ? 'noopener noreferrer' : null}
+  rel={cNewTab ? 'noopener' : null}
   {...props}
 >
   <slot />
