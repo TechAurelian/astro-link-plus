@@ -1,8 +1,16 @@
 ---
-import type { LinkProps } from '../src/types';
-import { isExternalLink, parseWithUrlMap, addUtmParameters } from '../src/utils';
+/**
+ * @license
+ * Copyright (c) TechAurelian {@link https://techaurelian.com}
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
-type Props = LinkProps;
+import type { LinkType } from "./types";
+import { isExternalLink, parseWithUrlMap, addUtmParameters } from "./utils";
+
+type Props = LinkType;
 
 const {
   addUtm = false,
@@ -15,14 +23,13 @@ const {
   utmAsReferrer = false,
   utmCampaign,
   utmContent,
-  utmMedium = 'link',
-  utmSource = 'website',
+  utmMedium = "link",
+  utmSource = "website",
   utmTerm,
-  ...props
 } = Astro.props;
 
 // Ensure that the href prop is present
-if (!href) throw new Error('Link requires a href prop');
+if (!href) throw new Error("Link requires a href prop");
 
 let cHref = href.toString();
 
@@ -55,9 +62,8 @@ if (addUtm) {
 
 <a
   href={cHref}
-  target={cNewTab ? '_blank' : null}
-  rel={cNewTab ? 'noopener' : null}
-  {...props}
+  target={cNewTab ? "_blank" : null}
+  rel={cNewTab ? "noopener" : null}
 >
   <slot />
 </a>

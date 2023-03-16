@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright (c) TechAurelian
+ * Copyright (c) TechAurelian {@link https://techaurelian.com}
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,7 +15,7 @@
  * @returns True if the link is external, false otherwise.
  */
 export function isExternalLink(href: string): boolean {
-  return new RegExp('^(([a-z]+:)|(//))', 'i').test(href);
+  return new RegExp("^(([a-z]+:)|(//))", "i").test(href);
 }
 
 /**
@@ -25,7 +25,10 @@ export function isExternalLink(href: string): boolean {
  * @param urlMap The url map to use.
  * @returns The parsed link.
  */
-export function parseWithUrlMap(href: string, urlMap: Record<string, string>): string {
+export function parseWithUrlMap(
+  href: string,
+  urlMap: Record<string, string>
+): string {
   return href.replace(/\{([^}]+)\}/g, (match, key) => urlMap[key] || match);
 }
 
@@ -53,14 +56,14 @@ export function addUtmParameters(
   // let params = url.searchParams;
 
   const params = new URLSearchParams();
-  if (utmSource) params.append('utm_source', utmSource);
-  if (utmMedium) params.append('utm_medium', utmMedium);
-  if (utmCampaign) params.append('utm_campaign', utmCampaign);
-  if (utmTerm) params.append('utm_term', utmTerm);
-  if (utmContent) params.append('utm_content', utmContent);
+  if (utmSource) params.append("utm_source", utmSource);
+  if (utmMedium) params.append("utm_medium", utmMedium);
+  if (utmCampaign) params.append("utm_campaign", utmCampaign);
+  if (utmTerm) params.append("utm_term", utmTerm);
+  if (utmContent) params.append("utm_content", utmContent);
 
   if (utmAsReferrer) {
-    url.searchParams.append('referrer', params.toString());
+    url.searchParams.append("referrer", params.toString());
   } else {
     // Append params to url.searchParams, one by one, because no `appendAll` method exists
     // See https://github.com/whatwg/url/issues/461
