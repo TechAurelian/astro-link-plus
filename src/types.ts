@@ -15,6 +15,7 @@ export const linkSchema = z
   .object({
     href: z.string().refine((val) => new URL(val, "http://localhost")),
 
+    class: z.string().optional(),
     addUtm: z.boolean().optional(),
     newTab: z.boolean().optional(),
     noFollowRel: z.boolean().optional(),

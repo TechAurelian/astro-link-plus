@@ -15,6 +15,7 @@ type Props = LinkType;
 const {
   addUtm = false,
   href,
+  class: className,
   newTab,
   noFollowRel,
   noReferrerRel,
@@ -62,6 +63,7 @@ if (addUtm) {
 
 <a
   href={cHref}
+  class={className}
   target={cNewTab ? "_blank" : null}
   rel={cNewTab ? "noopener" : null}
 >
