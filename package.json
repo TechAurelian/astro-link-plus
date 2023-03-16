@@ -15,7 +15,7 @@
   },
   "exports": {
     ".": "./index.ts",
-    "./link": "./link/index.ts"
+    "./components": "./components/index.ts"
   },
   "files": [
     "src",

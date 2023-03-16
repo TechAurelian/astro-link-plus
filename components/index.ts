@@ -7,5 +7,4 @@
  */
 
 export { default as Link } from "./Link.astro";
-export { linkSchema } from "./types";
-export type { LinkType } from "./types";
+

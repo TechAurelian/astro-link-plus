@@ -8,6 +8,9 @@
 
 import type { AstroIntegration } from 'astro';
 
+export { linkSchema } from "./src/types";
+export type { LinkType } from "./src/types";
+
 export interface AstroLinkPlusOptions {
   urlMap?: Record<string, string>;
 }
