@@ -7,8 +7,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import type { LinkType } from "../src/types";
-import { isExternalLink, parseWithUrlMap, addUtmParameters } from "../src/utils";
+import type { LinkType } from '../src/types';
+import { isExternalLink, parseWithUrlMap, addUtmParameters } from '../src/utils';
 
 type Props = LinkType;
 
@@ -24,13 +24,13 @@ const {
   utmAsReferrer = false,
   utmCampaign,
   utmContent,
-  utmMedium = "link",
-  utmSource = "website",
+  utmMedium = 'link',
+  utmSource = 'website',
   utmTerm,
 } = Astro.props;
 
 // Ensure that the href prop is present
-if (!href) throw new Error("Link requires a href prop");
+if (!href) throw new Error('Link requires a href prop');
 
 let cHref = href.toString();
 
@@ -60,12 +60,4 @@ if (addUtm) {
 
 // console.log(`cHref: ${cHref}`);
 ---
-
-<a
-  href={cHref}
-  class={className}
-  target={cNewTab ? "_blank" : null}
-  rel={cNewTab ? "noopener" : null}
->
-  <slot />
-</a>
+<a href={cHref} class={className} target={cNewTab ? '_blank' : null} rel={cNewTab ? 'noopener' : null}><slot /></a>
