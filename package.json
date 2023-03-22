@@ -1,7 +1,7 @@
 {
   "name": "astro-link-plus",
   "description": "A Link component for Astro with enhanced built-in features such as opening external links in new tabs, adding rel keywords and UTM parameters, and replacing URLs with custom mappings.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "author": "TechAurelian (https://techaurelian.com)",
   "license": "MIT",
@@ -17,10 +17,6 @@
     ".": "./index.ts",
     "./components": "./components/index.ts"
   },
-  "files": [
-    "src",
-    "index.ts"
-  ],
   "keywords": [
     "astro",
     "astro-component",
