@@ -34,6 +34,6 @@
   ],
   "scripts": {},
   "devDependencies": {
-    "astro": "^2.1.4"
+    "astro": "^2.4.2"
   }
 }
